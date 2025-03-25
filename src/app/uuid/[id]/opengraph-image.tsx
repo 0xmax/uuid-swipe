@@ -170,6 +170,7 @@ export default async function Image({ params }: { params: { id: string } }) {
                 const decoded = safeAtob(params.id);
                 const profile = JSON.parse(decoded);
                 return profile.starSign || "Cosmic UUID ✧";
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
               } catch (_) {
                 return "Cosmic UUID ✧";
               }

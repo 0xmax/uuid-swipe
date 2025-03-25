@@ -19,7 +19,7 @@ const UuidCard = forwardRef<HTMLDivElement, UuidCardProps>(
         'bg-gradient-to-br from-indigo-500 to-fuchsia-500'
       ];
       return colors[Math.floor(Math.random() * colors.length)];
-    }, [profile.uuid]); // Only recalculate when UUID changes
+    }, []); // Removed the profile.uuid dependency as it's not needed for color selection
 
     return (
       <motion.div
