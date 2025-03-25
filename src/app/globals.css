@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 @theme inline {
@@ -12,15 +12,75 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  height: -webkit-fill-available;
+  overscroll-behavior: none;
+  touch-action: manipulation;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  height: -webkit-fill-available;
+  overscroll-behavior: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+/* Animations for swipe effects */
+@keyframes swipeRight {
+  from {
+    transform: translateX(0) rotate(0);
+  }
+  to {
+    transform: translateX(400px) rotate(30deg);
+  }
+}
+
+@keyframes swipeLeft {
+  from {
+    transform: translateX(0) rotate(0);
+  }
+  to {
+    transform: translateX(-400px) rotate(-30deg);
+  }
+}
+
+.swipe-right-animation {
+  animation: swipeRight 0.4s forwards;
+}
+
+.swipe-left-animation {
+  animation: swipeLeft 0.4s forwards;
+}
+
+/* Disable text selection on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+/* Allow text selection in specific areas */
+.selectable-text {
+  user-select: text;
+  -webkit-touch-callout: default;
 }
