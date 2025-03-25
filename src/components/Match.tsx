@@ -67,12 +67,12 @@ const Match: React.FC<MatchProps> = ({ profile, isVisible, onClose, onShare }) =
 
             <div className="text-center">
               <motion.h2
-                className="text-3xl font-bold mb-4"
-                initial={{ y: -20, opacity: 0 }}
+                className="text-xl mb-2"
+                initial={{ y: -10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2 }}
+                transition={{ delay: 0.3 }}
               >
-                It's a Match!
+                It&apos;s a Match!
               </motion.h2>
               
               <motion.div
@@ -92,7 +92,7 @@ const Match: React.FC<MatchProps> = ({ profile, isVisible, onClose, onShare }) =
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4 }}
               >
-                You've matched with this UUID! It seems to like you too 😉
+                You&apos;ve matched with this UUID! It seems to like you too 😉
               </motion.p>
               
               <div className="flex gap-3 justify-center">

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -15,8 +15,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "UUID Matcher - Find Your Perfect UUID",
   description: "A Tinder-like experience for matching with UUIDs. Swipe through unique identifiers and find your perfect match!",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
   applicationName: "UUID Matcher",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
   themeColor: "#1a1a2e",
 };
 

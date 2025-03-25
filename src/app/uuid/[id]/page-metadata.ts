@@ -9,7 +9,8 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
       const profile = JSON.parse(decoded);
       uuid = profile.uuid;
     }
-  } catch (e) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_) {
     // If it's not base64 encoded, use the id as is
     uuid = params.id.replace(/_/g, '-');
   }
@@ -19,17 +20,17 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 
   return {
     title: `Perfect UUID Match Found - ${shortUuid}...`,
-    description: "You've found your perfect UUID! It's a match made in digital heaven. Share this unique identifier with the world!",
+    description: "You&apos;ve found your perfect UUID! It&apos;s a match made in digital heaven. Share this unique identifier with the world!",
     openGraph: {
       title: 'Perfect UUID Match - UUIDMatcher',
-      description: "You've found your perfect UUID! Share this unique identifier with the world!",
+      description: "You&apos;ve found your perfect UUID! Share this unique identifier with the world!",
       images: [`/uuid/${params.id}/opengraph-image`],
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
       title: 'Perfect UUID Match - UUIDMatcher',
-      description: "You've found your perfect UUID! Share this unique identifier with the world!",
+      description: "You&apos;ve found your perfect UUID! Share this unique identifier with the world!",
       images: [`/uuid/${params.id}/opengraph-image`],
     },
   };

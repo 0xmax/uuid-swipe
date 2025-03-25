@@ -55,7 +55,8 @@ const generateShareableUrl = (profile: UuidProfile): string => {
     const profileJson = JSON.stringify(profile);
     const encodedProfile = btoa(profileJson);
     return `${window.location.origin}/uuid/${encodedProfile}`;
-  } catch (e) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_) {
     // Option 2: Fallback to just using the UUID
     // Replace dashes with underscores for URL compatibility
     const safeUuid = profile.uuid.replace(/-/g, '_');

@@ -12,14 +12,12 @@ export default function Home() {
   const {
     currentProfile,
     swipeDirection,
-    isAnimating,
     showMatch,
     matchedProfile,
     handleSwipe,
     handleShare,
     handleShareMatch,
     handleCloseMatch,
-    setIsAnimating,
   } = useSwipe();
 
   // Manual swipe with the card reference - simplified for better reliability
@@ -101,7 +99,7 @@ export default function Home() {
                 transition={{ duration: 0.5 }}
               >
                 <h2 className="text-2xl font-bold mb-4">No more UUIDs!</h2>
-                <p className="mb-6">We're generating some more unique identifiers for you.</p>
+                <p className="mb-6">We&apos;re generating some more unique identifiers for you.</p>
                 <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-pink-500"></div>
               </motion.div>
             )}

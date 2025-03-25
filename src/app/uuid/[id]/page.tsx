@@ -10,8 +10,8 @@ import { generateUuidProfile } from '@/utils/uuidGenerator';
 // Function to generate random fun facts about finding the perfect UUID
 const getPerfectMatchPhrases = () => {
   const phrases = [
-    "You've found your perfect UUID! It's like finding a digital soulmate.",
-    "This UUID was waiting for you all along. It's a perfect match!",
+    "You&apos;ve found your perfect UUID! It&apos;s like finding a digital soulmate.",
+    "This UUID was waiting for you all along. It&apos;s a perfect match!",
     "Some UUIDs are meant to be. This one had your name on it!",
     "Out of trillions of possibilities, you found the one. Destiny!",
     "What are the odds? You and this UUID are meant for each other!"
@@ -23,7 +23,8 @@ const getPerfectMatchPhrases = () => {
 const safeAtob = (str: string): string => {
   try {
     return atob(str);
-  } catch (e) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_) {
     return str;
   }
 };
@@ -44,11 +45,13 @@ export default function UuidDetail() {
       try {
         const parsedProfile = JSON.parse(decoded);
         setProfile(parsedProfile);
-      } catch (e) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (_) {
         // Not valid JSON, create a profile with the decoded ID
         createProfileFromId(id);
       }
-    } catch (e) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_) {
       // If it's not base64 encoded, use the ID as a UUID and generate the rest
       createProfileFromId(id);
     }
@@ -74,8 +77,8 @@ export default function UuidDetail() {
   if (!profile) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-900 to-black p-4 text-white text-center">
-        <h1 className="text-3xl font-bold mb-4">UUID Not Found</h1>
-        <p className="mb-6">Sorry, we couldn't find this UUID. It might have been lost in the digital void.</p>
+        <h2 className="text-2xl font-bold mb-4">UUID Not Found</h2>
+        <p className="mb-6">Sorry, we couldn&apos;t find this UUID. It might have been lost in the digital void.</p>
         <Link href="/">
           <motion.button 
             className="bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-full text-white font-medium"
@@ -125,7 +128,7 @@ export default function UuidDetail() {
               repeatDelay: 2
             }}
           >
-            It's a Perfect Match!
+            It&apos;s a Perfect Match!
           </motion.h2>
           <p className="text-xl mb-2">{getPerfectMatchPhrases()}</p>
           <p className="text-sm opacity-80">Shared with 💖 from UUIDMatcher</p>

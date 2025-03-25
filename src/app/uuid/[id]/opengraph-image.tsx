@@ -38,7 +38,8 @@ const safeAtob = (str: string): string => {
     }
     // Browser environment
     return atob(str);
-  } catch (e) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_) {
     return str;
   }
 };
@@ -53,10 +54,12 @@ export default async function Image({ params }: { params: { id: string } }) {
       if (profile.uuid) {
         uuid = profile.uuid;
       }
-    } catch (e) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_) {
       // Not JSON, use decoded as is
     }
-  } catch (e) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_) {
     // If decoding fails, use the id as is
   }
   
@@ -80,6 +83,7 @@ export default async function Image({ params }: { params: { id: string } }) {
           backgroundImage: 'radial-gradient(circle at 25px 25px, #334155 2%, transparent 0%), radial-gradient(circle at 75px 75px, #334155 2%, transparent 0%)',
           backgroundSize: '100px 100px',
           padding: 40,
+          fontFamily: 'sans-serif',
         }}
       >
         {/* Logo/Header */}
@@ -164,24 +168,7 @@ export default async function Image({ params }: { params: { id: string } }) {
     ),
     {
       ...size,
-      fonts: [
-        {
-          name: 'Inter',
-          data: await fetch(
-            new URL('https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2', import.meta.url)
-          ).then((res) => res.arrayBuffer()),
-          weight: 400,
-          style: 'normal',
-        },
-        {
-          name: 'Inter',
-          data: await fetch(
-            new URL('https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYAZ9hiJ-Ek-_EeA.woff2', import.meta.url)
-          ).then((res) => res.arrayBuffer()),
-          weight: 700,
-          style: 'normal',
-        },
-      ],
+      // No custom fonts, use system fonts instead
     }
   );
 } 

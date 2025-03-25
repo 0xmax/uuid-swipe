@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef } from 'react';
 import { motion } from 'framer-motion';
 import { UuidProfile } from '@/utils/types';
 
@@ -9,9 +9,6 @@ interface UuidCardProps {
 
 const UuidCard = forwardRef<HTMLDivElement, UuidCardProps>(
   ({ profile, onSwipe }, ref) => {
-    // State to track drag direction
-    const [dragDirection, setDragDirection] = useState<string | null>(null);
-
     const getRandomColor = () => {
       const colors = [
         'bg-gradient-to-br from-pink-500 to-purple-600',
@@ -33,8 +30,8 @@ const UuidCard = forwardRef<HTMLDivElement, UuidCardProps>(
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         drag
         dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-        onDragStart={(e, { offset }) => {
-          setDragDirection(offset.x > 0 ? 'right' : 'left');
+        onDragStart={() => {
+          // Removed setting drag direction
         }}
         onDragEnd={(e, { offset, velocity }) => {
           // Use a smaller threshold for desktop to make it more sensitive
