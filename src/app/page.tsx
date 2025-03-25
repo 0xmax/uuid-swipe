@@ -41,18 +41,18 @@ export default function Home() {
         </motion.button>
       </header>
 
-      {/* Main content */}
-      <main className="flex-grow flex flex-col justify-center items-center p-4">
-        <div className="w-full max-w-sm mx-auto relative h-[500px]">
+      {/* Main content - adjusted with improved padding and responsive height */}
+      <main className="flex-grow flex flex-col justify-center items-center p-4 pb-safe">
+        <div className="w-full max-w-sm mx-auto relative h-[min(70vh,480px)] md:h-[500px] mb-4">
           {/* Card stack effect */}
           <div 
-            className="absolute top-1 left-1 right-1 h-[500px] rounded-xl bg-gray-800 opacity-20 z-0" 
+            className="absolute top-1 left-1 right-1 bottom-0 rounded-xl bg-gray-800 opacity-20 z-0" 
             style={{ 
               transform: 'rotate(-2deg)',
             }}
           />
           <div 
-            className="absolute top-0.5 left-0.5 right-0.5 h-[500px] rounded-xl bg-gray-800 opacity-30 z-0" 
+            className="absolute top-0.5 left-0.5 right-0.5 bottom-0 rounded-xl bg-gray-800 opacity-30 z-0" 
             style={{ 
               transform: 'rotate(1deg)',
             }}
@@ -106,8 +106,8 @@ export default function Home() {
           </AnimatePresence>
         </div>
 
-        {/* Swipe buttons - adding some margin to ensure consistent spacing */}
-        <div className="mt-6 w-full">
+        {/* Swipe buttons - adding margin, padding and safe area for devices with notches */}
+        <div className="w-full mb-4">
           <SwipeButtons 
             onSwipeLeft={() => handleButtonSwipe('left')} 
             onSwipeRight={() => handleButtonSwipe('right')} 
@@ -116,8 +116,8 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="p-4 text-center text-gray-400 text-sm">
+      {/* Footer - made more compact on mobile */}
+      <footer className="p-2 text-center text-gray-400 text-xs sm:text-sm">
         <p>Swipe through unique UUIDs. Find your perfect match!</p>
       </footer>
 

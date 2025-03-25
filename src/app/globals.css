@@ -27,6 +27,15 @@ body {
   overscroll-behavior: none;
 }
 
+/* Safe area utilities for iOS devices */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 1rem);
+}
+
+.mb-safe {
+  margin-bottom: env(safe-area-inset-bottom, 1rem);
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

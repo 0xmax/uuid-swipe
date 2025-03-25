@@ -23,7 +23,7 @@ const UuidCard = forwardRef<HTMLDivElement, UuidCardProps>(
     return (
       <motion.div
         ref={ref}
-        className={`w-full h-full rounded-xl shadow-xl overflow-hidden ${getRandomColor()} p-6 mx-auto`}
+        className={`w-full h-full rounded-xl shadow-xl overflow-hidden ${getRandomColor()} py-4 px-3 sm:p-6 mx-auto`}
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.8, opacity: 0 }}
@@ -46,50 +46,50 @@ const UuidCard = forwardRef<HTMLDivElement, UuidCardProps>(
         <div className="flex flex-col h-full">
           {/* UUID Display with fancy design */}
           <motion.div 
-            className="text-center mb-6 relative z-10"
+            className="text-center mb-3 sm:mb-6 relative z-10"
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 400 }}
           >
-            <h2 className="text-white text-lg font-medium mb-1">UUID</h2>
-            <div className="bg-black/20 backdrop-blur-sm p-4 rounded-lg">
-              <p className="text-white font-mono text-md sm:text-lg break-all">
+            <h2 className="text-white text-base sm:text-lg font-medium mb-1">UUID</h2>
+            <div className="bg-black/20 backdrop-blur-sm p-2 sm:p-4 rounded-lg">
+              <p className="text-white font-mono text-xs sm:text-lg break-all">
                 {profile.uuid}
               </p>
             </div>
           </motion.div>
 
           {/* Facts about the UUID */}
-          <div className="space-y-4 text-white flex-grow">
+          <div className="space-y-2 sm:space-y-4 text-white flex-grow">
             <motion.div 
-              className="bg-white/10 backdrop-blur-sm p-3 rounded-lg"
+              className="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg"
               whileHover={{ y: -5 }}
               transition={{ type: 'spring', stiffness: 300 }}
             >
-              <h3 className="font-medium mb-1">Age</h3>
-              <p>{profile.age} days old</p>
+              <h3 className="font-medium mb-0.5 sm:mb-1 text-sm sm:text-base">Age</h3>
+              <p className="text-sm sm:text-base">{profile.age} days old</p>
             </motion.div>
             
             <motion.div 
-              className="bg-white/10 backdrop-blur-sm p-3 rounded-lg"
+              className="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg"
               whileHover={{ y: -5 }}
               transition={{ type: 'spring', stiffness: 300 }}
             >
-              <h3 className="font-medium mb-1">Version</h3>
-              <p>{profile.version}</p>
+              <h3 className="font-medium mb-0.5 sm:mb-1 text-sm sm:text-base">Version</h3>
+              <p className="text-sm sm:text-base">{profile.version}</p>
             </motion.div>
             
             <motion.div 
-              className="bg-white/10 backdrop-blur-sm p-3 rounded-lg"
+              className="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg"
               whileHover={{ y: -5 }}
               transition={{ type: 'spring', stiffness: 300 }}
             >
-              <h3 className="font-medium mb-1">Fun Fact</h3>
-              <p>{profile.funFact}</p>
+              <h3 className="font-medium mb-0.5 sm:mb-1 text-sm sm:text-base">Fun Fact</h3>
+              <p className="text-sm sm:text-base">{profile.funFact}</p>
             </motion.div>
           </div>
 
           {/* Instruction overlay */}
-          <div className="text-center text-white/80 text-sm mt-4">
+          <div className="text-center text-white/80 text-xs sm:text-sm mt-3 sm:mt-4">
             Swipe or drag left to dismiss, right to like
           </div>
         </div>
