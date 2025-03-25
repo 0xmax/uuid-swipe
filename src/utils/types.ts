@@ -3,4 +3,5 @@ export interface UuidProfile {
   age: number;
   version: string;
   funFact: string;
+  starSign: string;
 } 

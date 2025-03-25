@@ -162,6 +162,11 @@ export default function UuidDetail() {
             </div>
             
             <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg">
+              <h3 className="font-medium mb-1">Star Sign</h3>
+              <p>{profile.starSign || "Unknown ✧"}</p>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg">
               <h3 className="font-medium mb-1">Fun Fact</h3>
               <p>{profile.funFact}</p>
             </div>

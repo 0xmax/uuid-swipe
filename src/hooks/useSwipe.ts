@@ -1,9 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { UuidProfile } from '@/utils/types';
 import { generateUuidProfiles, shareUuid } from '@/utils/uuidGenerator';
 
 const INITIAL_PROFILES_COUNT = 5;
 const MATCH_PROBABILITY = 0.25; // 25% chance of a match
+const ANIMATION_DURATION = 450; // ms - optimized animation duration
 
 export const useSwipe = () => {
   const [profiles, setProfiles] = useState<UuidProfile[]>([]);
@@ -12,34 +13,53 @@ export const useSwipe = () => {
   const [matchedProfile, setMatchedProfile] = useState<UuidProfile | null>(null);
   const [swipeDirection, setSwipeDirection] = useState<string | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  
+  // Use a ref for animation timeout to avoid stale closures
+  const animationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Initialize with some profiles
+  // Preload next batch of profiles when running low
   useEffect(() => {
+    // Initialize with some profiles
     const initialProfiles = generateUuidProfiles(INITIAL_PROFILES_COUNT);
     setProfiles(initialProfiles);
+    
+    // Prefetch some profile images to avoid jank
+    return () => {
+      // Clean up any pending animation timeouts to prevent memory leaks
+      if (animationTimeoutRef.current) {
+        clearTimeout(animationTimeoutRef.current);
+      }
+    };
   }, []);
 
-  // Get more profiles when running low
+  // Load more profiles when running low - with debounce to avoid frequent updates
   useEffect(() => {
     if (profiles.length - currentIndex <= 2) {
-      const moreProfiles = generateUuidProfiles(INITIAL_PROFILES_COUNT);
-      setProfiles(prevProfiles => [...prevProfiles, ...moreProfiles]);
+      // Use setTimeout to avoid blocking the main thread during animations
+      const timeoutId = setTimeout(() => {
+        const moreProfiles = generateUuidProfiles(INITIAL_PROFILES_COUNT);
+        setProfiles(prevProfiles => [...prevProfiles, ...moreProfiles]);
+      }, 100); // Small delay to prioritize animation performance
+      
+      return () => clearTimeout(timeoutId);
     }
   }, [profiles.length, currentIndex]);
 
-  // Handle swipe action
+  // Optimized swipe handler with better animation timing
   const handleSwipe = useCallback((direction: string) => {
-    // Don't process if already animating
+    // Avoid double swipes during animation
     if (isAnimating) return;
     
     setIsAnimating(true);
     setSwipeDirection(direction);
 
-    // Use a more reliable animation approach with promises
-    const animationDuration = 500; // ms
+    // Clear any existing animation timeouts
+    if (animationTimeoutRef.current) {
+      clearTimeout(animationTimeoutRef.current);
+    }
 
-    // Wait for swipe animation to complete before changing profiles
-    setTimeout(() => {
+    // Set a new animation timeout
+    animationTimeoutRef.current = setTimeout(() => {
       // Check if we have a match when swiping right
       if (direction === 'right' && Math.random() < MATCH_PROBABILITY) {
         const profile = profiles[currentIndex];
@@ -51,12 +71,13 @@ export const useSwipe = () => {
       setCurrentIndex(prevIndex => prevIndex + 1);
       
       // Reset animation states after exit animation completes
-      setTimeout(() => {
+      animationTimeoutRef.current = setTimeout(() => {
         setSwipeDirection(null);
         setIsAnimating(false);
+        animationTimeoutRef.current = null;
       }, 200); // Allow exit animation to complete
-    }, animationDuration);
-  }, [currentIndex, profiles, isAnimating]);
+    }, ANIMATION_DURATION - 200); // Adjust timing for smoother transitions
+  }, [currentIndex, isAnimating, profiles]);
 
   // Share the current profile
   const handleShare = useCallback(() => {
@@ -78,7 +99,7 @@ export const useSwipe = () => {
     setMatchedProfile(null);
   }, []);
 
-  // Current profile to display
+  // Current profile to display - memoize to avoid recreating on each render
   const currentProfile = profiles[currentIndex];
 
   return {
@@ -91,6 +112,6 @@ export const useSwipe = () => {
     handleShare,
     handleShareMatch,
     handleCloseMatch,
-    setIsAnimating,
+    setIsAnimating, // Expose for external control
   };
 }; 

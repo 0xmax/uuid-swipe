@@ -16,7 +16,23 @@ const uuidFunFacts = [
   "This UUID probably contains your birthday somewhere in its digits",
   "UUIDs were standardized in 2005, making them older than TikTok",
   "This UUID is unique across all time and space (probably)",
-  "This UUID contains more randomness than a cat's behavior"
+  "This UUID contains more randomness than a cat's behavior",
+  "This UUID has never been swiped right on before - you'd be its first match!",
+  "This UUID once won a chess match against IBM's Deep Blue",
+  "This UUID memorized the first 1000 digits of Pi just to show off",
+  "This UUID has been to every continent except Antarctica (it's on the bucket list)",
+  "This UUID can speak 7 programming languages but is shy about it",
+  "This UUID always returns its shopping cart to the designated area",
+  "This UUID would definitely remember your birthday without a Facebook reminder",
+  "This UUID never skips leg day at the binary gym",
+  "This UUID claims it once met Satoshi Nakamoto in an elevator",
+  "This UUID has a perfect credit score but never brags about it",
+  "This UUID always brings homemade cookies to office potlucks",
+  "This UUID won't get mad if you take the last slice of pizza",
+  "This UUID always knows which Tupperware lid matches which container",
+  "This UUID can fold a fitted sheet perfectly on the first try",
+  "This UUID doesn't get phished or fall for spam emails",
+  "This UUID has never accidentally liked an ex's social media post from 3 years ago"
 ];
 
 // UUID versions and their descriptions
@@ -28,9 +44,34 @@ const uuidVersions = [
   "v4 (Quantum resistant)"
 ];
 
+// Star signs for UUIDs
+const starSigns = [
+  "Aries ♈",
+  "Taurus ♉",
+  "Gemini ♊",
+  "Cancer ♋",
+  "Leo ♌", 
+  "Virgo ♍",
+  "Libra ♎",
+  "Scorpio ♏",
+  "Sagittarius ♐",
+  "Capricorn ♑",
+  "Aquarius ♒",
+  "Pisces ♓",
+  "Ophiuchus ⛎",
+  "Binary ⚇",
+  "Hexadecimal ⯏",
+  "Localhost ⌂"
+];
+
 // Generate a random integer between min and max (inclusive)
 const getRandomInt = (min: number, max: number): number => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+// Get random element from array
+const getRandomElement = <T>(array: T[]): T => {
+  return array[Math.floor(Math.random() * array.length)];
 };
 
 // Generate a random UUID profile
@@ -38,8 +79,9 @@ export const generateUuidProfile = (): UuidProfile => {
   return {
     uuid: uuidv4(),
     age: getRandomInt(1, 120),
-    version: uuidVersions[getRandomInt(0, uuidVersions.length - 1)],
-    funFact: uuidFunFacts[getRandomInt(0, uuidFunFacts.length - 1)]
+    version: getRandomElement(uuidVersions),
+    funFact: getRandomElement(uuidFunFacts),
+    starSign: getRandomElement(starSigns)
   };
 };
 

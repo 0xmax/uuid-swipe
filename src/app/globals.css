@@ -27,6 +27,25 @@ body {
   overscroll-behavior: none;
 }
 
+/* Performance optimizations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform;
+}
+
+.text-stable {
+  text-rendering: optimizeSpeed;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.content-stable {
+  contain: content;
+  content-visibility: auto;
+}
+
 /* Safe area utilities for iOS devices */
 .pb-safe {
   padding-bottom: env(safe-area-inset-bottom, 1rem);

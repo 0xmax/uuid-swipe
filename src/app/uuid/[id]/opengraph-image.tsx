@@ -153,6 +153,28 @@ export default async function Image({ params }: { params: { id: string } }) {
               {uuid}
             </p>
           </div>
+          
+          {/* Star Sign */}
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.15)',
+            padding: '10px 20px',
+            borderRadius: 16,
+            marginBottom: 10,
+            fontSize: 20,
+            color: 'white',
+            fontWeight: 'bold'
+          }}>
+            {/* Try to extract star sign from profile if encoded, otherwise use placeholder */}
+            {(() => {
+              try {
+                const decoded = safeAtob(params.id);
+                const profile = JSON.parse(decoded);
+                return profile.starSign || "Cosmic UUID ✧";
+              } catch (_) {
+                return "Cosmic UUID ✧";
+              }
+            })()}
+          </div>
         </div>
 
         {/* Call to action */}
